@@ -1,15 +1,19 @@
-from datetime import datetime
 from flask import Flask, render_template
+from model import db
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def welcome():
-    return render_template('welcome.html') 
+    return render_template('welcome.html', name='Fimber', age=31) 
 
-@app.route("/date")
-def date():
-    return "This page was served at " + str(datetime.now())
 
-counter = 1
+@app.route("/card")
+def card_view():
+    title = 'Data science Terms',
+    description = db["description"]  
+    glossary = db['glossary']
+    return render_template('card.html', title=title, description=description, glossary=glossary) 
+
+
